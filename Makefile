@@ -1,31 +1,15 @@
-all: main clean-deps
+all: main
 
 CXX = clang++
 override CXXFLAGS += -g -Wno-everything
 
 SRCS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.cpp' -print | sed -e 's/ /\\ /g')
-OBJS = $(SRCS:.cpp=.o)
-DEPS = $(SRCS:.cpp=.d)
 
-%.d: %.cpp
-	@set -e; rm -f "$@"; \
-	$(CXX) -MM $(CXXFLAGS) "$<" > "$@.$$$$"; \
-	sed 's,\([^:]*\)\.o[ :]*,\1.o \1.d : ,g' < "$@.$$$$" > "$@"; \
-	rm -f "$@.$$$$"
+main: $(SRCS)
+	$(CXX) $(CXXFLAGS) $(SRCS) -o "$@"
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c "$<" -o "$@"
-
-include $(DEPS)
-
-main: $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o "$@"
-
-main-debug: $(OBJS)
-	$(CXX) $(CXXFLAGS) -O0 $(OBJS) -o "$@"
+main-debug: $(SRCS)
+	$(CXX) $(CXXFLAGS) -O0 $(SRCS) -o "$@"
 
 clean:
-	rm -f $(OBJS) $(DEPS) main
-
-clean-deps:
-	rm -f $(DEPS)
+	rm -f main main-debug
