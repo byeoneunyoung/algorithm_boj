@@ -1,4 +1,5 @@
 # algorithm_boj
-boj
-wyu2341
+
+/br{wyu2341}
+/n
 Soongsil Univ.
