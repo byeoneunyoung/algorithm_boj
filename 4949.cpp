@@ -15,8 +15,11 @@ int main(){
         int state = 0;
         int l = arr.length();
         for(int i = 0; i< l ;i++){
-            
+
+            //열림 괄호가 들어올 경우
             if(arr[i] == '(' || arr[i] =='[') ss.push(arr[i]);
+
+            //소괄호 닫힘의 경우
             else if(arr[i] == ')'){
                 if(ss.empty() == 0 && ss.top() == '(') ss.pop();
                 else if(ss.empty() == 0 && ss.top() != '('){
@@ -28,6 +31,7 @@ int main(){
                     break;
                 }
             }
+            //대괄호 닫힘의 경우
             else if(arr[i] == ']'){
                 if(ss.empty() == 0 && ss.top() == '[') ss.pop();
                 else if(ss.empty() == 0 && ss.top() != '['){
@@ -40,8 +44,10 @@ int main(){
                 }
             }  
         }
+        //yes,no출력 경우의 수
         if(ss.empty() == 0 || state == 1) cout<<"no\n";
         else if(ss.empty() == 1 && state == 0) cout<<"yes\n";
+        //stack다 비우기
         while(!ss.empty()) ss.pop();
     }
 }
