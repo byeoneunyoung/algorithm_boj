@@ -48,5 +48,5 @@ int main(){
         else if(ss.empty() == 1 && state == 0) cout<<"yes\n";
         //stack다 비우기
         while(!ss.empty()) ss.pop();
-    }
+    }//이미 for문 돌기 전에 state는 초기화 되므로 따로 할 필요 없음
 }
