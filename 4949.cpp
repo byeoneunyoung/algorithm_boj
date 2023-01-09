@@ -8,7 +8,6 @@ stack <char> ss;
 
 int main(){
     string arr;
-    
     while(1){
         getline(cin, arr);
         if(arr == ".") break;
